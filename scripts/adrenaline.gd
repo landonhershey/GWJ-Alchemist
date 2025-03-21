@@ -12,5 +12,9 @@ func _init() -> void:
     infection_multiplier = 1.0
     infection_reduction = 0.0
 
-func end_turn() -> void:
-    super.end_turn()
+func apply_effect(player: Player) -> void:
+    print("Applying Adrenaline effect")
+    super.apply_effect(player)
+
+func end_turn(player: Player) -> void:
+    super.end_turn(player)

@@ -7,8 +7,12 @@
 [ext_resource type="Script" uid="uid://cr0b5bai6xox4" path="res://scripts/UIManager.gd" id="5_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://bfwom58spr8h8" path="res://sprites/knife.png" id="6_kdubu"]
 [ext_resource type="Texture2D" uid="uid://chxp2re53wemr" path="res://sprites/alchemy_book.png" id="7_rj586"]
-[ext_resource type="Texture2D" uid="uid://c6itcpcujwkbh" path="res://sprites/brewing_potion.png" id="8_4d7sh"]
-[ext_resource type="PackedScene" uid="uid://3lbdt1sjkp2l" path="res://potion.tscn" id="9_4d7sh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d21ai"]
+bg_color = Color(2.31028e-06, 0.540661, 0.765338, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj586"]
+bg_color = Color(0.668634, 0, 0.116657, 1)
 
 [node name="World" type="Node2D"]
 
@@ -37,9 +41,9 @@ metadata/_edit_use_anchors_ = true
 [node name="BrewPotion" type="Button" parent="UIManager"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.15
+anchor_left = 0.05
 anchor_top = -2.475
-anchor_right = 0.15
+anchor_right = 0.05
 anchor_bottom = -2.475
 offset_left = -1.0
 offset_top = 99.0
@@ -50,35 +54,37 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ResearchBar" type="ProgressBar" parent="UIManager"]
 layout_mode = 0
-offset_left = 28.0
-offset_top = 537.0
-offset_right = 220.0
-offset_bottom = 624.0
+offset_left = 29.0
+offset_top = 526.0
+offset_right = 221.0
+offset_bottom = 613.0
+tooltip_text = "research"
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 1, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_d21ai")
 show_percentage = false
 
 [node name="PotionContainer" type="HBoxContainer" parent="UIManager"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 198.0
-offset_right = 303.0
-offset_bottom = 290.0
+offset_left = -7.0
+offset_top = 181.0
+offset_right = 293.0
+offset_bottom = 273.0
 
 [node name="TakePotion" type="Button" parent="UIManager"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.075
-anchor_top = -2.025
-anchor_right = -0.075
-anchor_bottom = -2.025
-offset_left = 9.0
-offset_top = 285.0
-offset_right = 182.0
-offset_bottom = 367.0
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+anchor_right = 4.35
+offset_left = -7.0
+offset_top = 181.0
+offset_right = 93.0
+offset_bottom = 273.0
+tooltip_text = "take potion"
 text = "Take Potion"
 metadata/_edit_use_anchors_ = true
 
 [node name="Hands" type="Sprite2D" parent="UIManager"]
-position = Vector2(408, 388)
+position = Vector2(431, 390)
 texture = ExtResource("1_0hol4")
 
 [node name="Knife" type="Sprite2D" parent="UIManager"]
@@ -86,25 +92,41 @@ position = Vector2(873, 129)
 texture = ExtResource("6_kdubu")
 
 [node name="KnifeBtn" type="Button" parent="UIManager/Knife"]
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = -0.195
 anchor_top = 1.3
 anchor_right = -3.205
 anchor_bottom = 1.24
-offset_left = -30.5
-offset_top = -175.0
-offset_right = 358.5
-offset_bottom = -81.0
+offset_left = -26.5
+offset_top = -172.0
+offset_right = 362.5
+offset_bottom = -78.0
+tooltip_text = "use knife"
 text = "Knife"
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UIManager"]
 layout_mode = 0
-offset_left = 447.0
-offset_top = 12.0
-offset_right = 927.0
-offset_bottom = 105.0
+offset_left = 307.0
+offset_top = 11.0
+offset_right = 787.0
+offset_bottom = 104.0
 text = "describe user actions"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UIManager"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EvilBar" type="ProgressBar" parent="UIManager"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 418.0
+offset_right = 226.0
+offset_bottom = 487.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rj586")
+show_percentage = false
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("2_q6r6c")
@@ -125,12 +147,8 @@ metadata/_custom_type_script = "uid://b7o11vb0q3t8j"
 position = Vector2(899, 532)
 texture = ExtResource("7_rj586")
 
-[node name="BrewingPotion" type="Sprite2D" parent="."]
-position = Vector2(481, 210)
-texture = ExtResource("8_4d7sh")
-
-[node name="Sprite2D" parent="." instance=ExtResource("9_4d7sh")]
-position = Vector2(710, 212)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(578, 319)
 
 [connection signal="pressed" from="UIManager/ResearchBtn" to="TurnManager/Player" method="_on_research_btn_pressed"]
 [connection signal="pressed" from="UIManager/BrewPotion" to="TurnManager/Player" method="_on_brew_potion_pressed"]

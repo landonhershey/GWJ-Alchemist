@@ -3,6 +3,7 @@ extends Control
 @export var player : Player
 
 @onready var research_bar = $ResearchBar
+@onready var evil_bar = $EvilBar
 @onready var hand_sprite = $Hands
 
 @onready var hands_folder =  "res://sprites/hands/"
@@ -32,10 +33,6 @@ func on_player_researched(amount : float) -> void:
 	research_bar.value += amount
 	# print("Research progress updated: ", research_bar.value)
 
-func on_player_brewed_potion(potion : Potion) -> void:
-	print("Potion brewed: ", potion)
-	# Update UI to show the brewed potion
-	# This is a placeholder, you can add more detailed UI updates here
 
 
 
@@ -59,6 +56,9 @@ func _on_turn_manager_start_turn_phase() -> void:
 	if infection_number > len(hands_sprites) - 1:
 		infection_number = len(hands_sprites) - 1
 	hand_sprite.texture = hands_sprites[infection_number]
+
+	var evil_progress = player.evil / player.evil_max
+	evil_bar.value = evil_progress * 100
 	
 
 

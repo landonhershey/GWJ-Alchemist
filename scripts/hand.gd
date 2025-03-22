@@ -5,7 +5,7 @@ class_name Hand
 # Properties
 var infection: float = 0.0 # Infection level (0.0 to 1.0)
 var infection_rate: float = 0.0 # Rate at which infection increases
-var productivity: float = 1.0 # Productivity level (1.0 is base productivity)
+var productivity: float = 5.0 # Productivity level (1.0 is base productivity)
 var max_infection = 1.0
 
 signal infection_complete

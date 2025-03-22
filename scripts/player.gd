@@ -11,7 +11,7 @@ class_name Player
 # @export var infection_color : Color = Color(1, 0, 0)
 
 var research_progress : float = 0.0
-var max_research : float = 100.0
+var max_research : float = 500.0
 var research_rate : float = 1.0
 var research_rate_multiplier : float = 1.0
 # @export var research_color : Color = Color(0, 0, 1)
@@ -131,10 +131,11 @@ func get_net_productivity() -> float:
 
 func get_stats() -> Dictionary:
 	return {
-		"left_infection": left_hand.get_infection(),
-		"right_infection": right_hand.get_infection(),
+		"infection": left_hand.get_infection(),
 		"research_progress": research_progress,
-		"net_productivity": get_net_productivity()
+		"net_productivity": get_net_productivity(),
+		"evil": evil,
+		"fingers": fingers
 	}
 
 

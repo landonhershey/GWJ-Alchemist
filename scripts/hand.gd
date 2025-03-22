@@ -6,6 +6,7 @@ class_name Hand
 var infection: float = 0.0 # Infection level (0.0 to 1.0)
 var infection_rate: float = 0.0 # Rate at which infection increases
 var productivity: float = 1.0 # Productivity level (1.0 is base productivity)
+var max_infection = 1.0
 
 signal infection_complete
 
@@ -28,7 +29,7 @@ func get_infection_rate() -> float:
 
 
 func set_infection(new_infection: float) -> void:
-	infection = clamp(new_infection, 0.0, 1.0) # Ensure infection stays within bounds
+	infection = clamp(new_infection, 0.0, max_infection) # Ensure infection stays within bounds
 
 func reduce_infection(amount: float) -> void:
 	infection = max(0.0, infection - amount)
@@ -43,8 +44,7 @@ func set_productivity(new_productivity: float) -> void:
 
 func end_turn() -> void:
 	infection += infection_rate
-	productivity = productivity - infection
-	if infection >= 1.0:
-		infection = 1.0
+	if infection >= max_infection:
+		infection = max_infection
 		productivity = 0.0
 		emit_signal("infection_complete")

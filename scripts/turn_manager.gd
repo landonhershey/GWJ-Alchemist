@@ -5,7 +5,17 @@ extends Node
 var player : Player
 var current_state: GameState = GameState.START_TURN
 
+signal start_turn_phase
+signal player_input_phase
+signal end_turn_phase
+
 signal game_over
+
+enum Ending {
+	INFECTION,
+	RESEARCH
+}
+
 
 # Enum for the different states
 enum GameState {
@@ -37,6 +47,7 @@ func change_state(new_state: GameState) -> void:
 # Logic for the START_TURN state
 func start_turn() -> void:
 	print("Starting turn...")
+	start_turn_phase.emit()
 	# Add your start turn logic here
 
 	# UI changes, possibly dialogue boxes, etc.
@@ -46,12 +57,14 @@ func start_turn() -> void:
 func player_input() -> void:
 	print("Waiting for player input...")
 	# wait for player input (this is just a placeholder)
+	player_input_phase.emit()
 	await player.player_turn_over
 
 	change_state(GameState.END_TURN)
 
 # Logic for the END_TURN state
 func end_turn() -> void:
+	end_turn_phase.emit()
 	player.end_turn()
 	print("Ending turn...")
 	
@@ -62,3 +75,7 @@ func end_turn() -> void:
 func on_game_over() -> void:
 	print("Game Over!")
 	emit_signal("game_over")
+
+
+func _on_player_research_complete() -> void:
+	pass # Replace with function body.

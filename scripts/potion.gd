@@ -9,6 +9,9 @@ var infection_reduction: float = 0.0
 var infection_multiplier: float = 1.0
 var productivity_addition: float = 0.0
 
+var message : String = "You feel strange..."
+var decay_message: String = "The potion's effects wear off."
+
 signal potion_effect_ended
 
 
@@ -36,6 +39,7 @@ func remove_effect(player: Player) -> void:
 	player.left_hand.set_productivity(player.left_hand.get_productivity() - productivity_addition)
 	player.right_hand.set_productivity(player.right_hand.get_productivity() - productivity_addition)
 	print("REMOVING potion effect")
+
 
 func end_turn(player: Player) -> void:
 	# Apply the potion effects for the turn

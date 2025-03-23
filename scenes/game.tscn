@@ -1,0 +1,263 @@
+[gd_scene load_steps=20 format=3 uid="uid://dbssb3p448wf4"]
+
+[ext_resource type="Texture2D" uid="uid://susmo0ambs03" path="res://sprites/hands/hand_1.png" id="1_0hol4"]
+[ext_resource type="Texture2D" uid="uid://bcfha6ywqcqxw" path="res://desk2.jpg" id="1_dinhu"]
+[ext_resource type="FontFile" uid="uid://b73hyirjrkfwe" path="res://UncialAntiqua-Regular.ttf" id="1_kvpfn"]
+[ext_resource type="Script" uid="uid://dxbtbu7ocipom" path="res://scripts/turn_manager.gd" id="2_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://c6itcpcujwkbh" path="res://sprites/potions/brewing_potion.png" id="3_4d7sh"]
+[ext_resource type="Script" uid="uid://dpv1luqqwsneu" path="res://scripts/player.gd" id="3_kdubu"]
+[ext_resource type="Script" uid="uid://b7o11vb0q3t8j" path="res://scripts/hand.gd" id="4_d21ai"]
+[ext_resource type="Texture2D" uid="uid://buoujp0vb1cag" path="res://sprites/right_hands/right_hand_0.png" id="4_rj586"]
+[ext_resource type="Script" uid="uid://cr0b5bai6xox4" path="res://scripts/UIManager.gd" id="5_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://bfwom58spr8h8" path="res://sprites/knife.png" id="6_kdubu"]
+[ext_resource type="Texture2D" uid="uid://chxp2re53wemr" path="res://sprites/alchemy_book.png" id="7_rj586"]
+[ext_resource type="Texture2D" uid="uid://o0kopj15344w" path="res://sprites/holy_mantle.png" id="7_vtaks"]
+
+[sub_resource type="Theme" id="Theme_dinhu"]
+default_font = ExtResource("1_kvpfn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+bg_color = Color(0.463838, 0.635312, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d21ai"]
+bg_color = Color(2.31028e-06, 0.540661, 0.765338, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinhu"]
+bg_color = Color(0.812995, 0.875895, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj586"]
+bg_color = Color(0.668634, 0, 0.116657, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d7sh"]
+bg_color = Color(0.0596706, 0.0813081, 0.238832, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir8iy"]
+bg_color = Color(1, 0.843137, 0, 1)
+
+[node name="World" type="Node2D"]
+
+[node name="Desk2" type="Sprite2D" parent="."]
+position = Vector2(590, 1622)
+scale = Vector2(2.312, 1.304)
+texture = ExtResource("1_dinhu")
+
+[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("player", "message", "power_bar", "research_bar", "evil_bar", "hand_sprite", "messages_container", "potion_container")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_dinhu")
+script = ExtResource("5_q6r6c")
+default_font = ExtResource("1_kvpfn")
+player = NodePath("../TurnManager/Player")
+message = NodePath("MessagesContainer/Message")
+power_bar = NodePath("PowerBar")
+research_bar = NodePath("ResearchBar")
+evil_bar = NodePath("EvilBar")
+hand_sprite = NodePath("Hands")
+messages_container = NodePath("MessagesContainer")
+potion_container = NodePath("TakePotion/PotionContainer")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="UIManager"]
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -5.75
+anchor_top = -5.325
+anchor_right = 35.525
+anchor_bottom = 19.45
+texture = ExtResource("1_dinhu")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ResearchBtn" type="Button" parent="UIManager"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 20.05
+anchor_top = 6.025
+anchor_right = 23.4
+anchor_bottom = 9.6
+tooltip_text = "research cure"
+text = "Research"
+metadata/_edit_use_anchors_ = true
+
+[node name="AlchemyBook" type="Sprite2D" parent="UIManager/ResearchBtn"]
+position = Vector2(67, 67)
+texture = ExtResource("7_rj586")
+metadata/_edit_lock_ = true
+
+[node name="BrewPotion" type="Button" parent="UIManager"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.95
+anchor_top = 0.675
+anchor_right = 6.0
+anchor_bottom = 5.375
+tooltip_text = "brew potion"
+text = "Brew Potion"
+metadata/_edit_use_anchors_ = true
+
+[node name="BrewingPotion" type="Sprite2D" parent="UIManager/BrewPotion"]
+position = Vector2(86, 103)
+scale = Vector2(1.66, 1.78)
+texture = ExtResource("3_4d7sh")
+metadata/_edit_lock_ = true
+
+[node name="ResearchBar" type="ProgressBar" parent="UIManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 21.825
+anchor_top = 12.525
+anchor_right = 22.875
+anchor_bottom = 12.525
+offset_top = 134.0
+offset_right = 92.0
+offset_bottom = 176.0
+rotation = -1.5708
+tooltip_text = "cure progress"
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d21ai")
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="TakePotion" type="Button" parent="UIManager"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+anchor_left = 5.3
+anchor_top = -3.25
+anchor_right = 11.325
+anchor_bottom = -3.25
+offset_left = -7.0
+offset_top = 181.0
+offset_right = 93.0
+offset_bottom = 273.0
+tooltip_text = "take potion"
+text = "Take Potion"
+metadata/_edit_use_anchors_ = true
+
+[node name="PotionContainer" type="HBoxContainer" parent="UIManager/TakePotion"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 92.0
+
+[node name="Hands" type="Sprite2D" parent="UIManager"]
+position = Vector2(442, 389)
+texture = ExtResource("1_0hol4")
+
+[node name="KnifeBtn" type="Button" parent="UIManager"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 10.6
+anchor_top = 4.45
+anchor_right = 14.925
+anchor_bottom = 9.05
+tooltip_text = "use knife"
+text = "Knife"
+metadata/_edit_use_anchors_ = true
+
+[node name="Knife" type="Sprite2D" parent="UIManager/KnifeBtn"]
+position = Vector2(98, 96)
+scale = Vector2(2, 2)
+texture = ExtResource("6_kdubu")
+metadata/_edit_lock_ = true
+
+[node name="EvilBar" type="ProgressBar" parent="UIManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 13.85
+anchor_right = 5.74045
+anchor_bottom = 15.6016
+offset_right = 0.382141
+offset_bottom = -1.06512
+rotation = 0.00549578
+theme_override_styles/background = SubResource("StyleBoxFlat_dinhu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rj586")
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="RightHand" type="Sprite2D" parent="UIManager"]
+position = Vector2(531, 391)
+texture = ExtResource("4_rj586")
+
+[node name="PowerBar" type="ProgressBar" parent="UIManager"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 567.0
+offset_right = 610.0
+offset_bottom = 627.0
+tooltip_text = "power: how quickly you can research"
+theme_override_styles/background = SubResource("StyleBoxFlat_4d7sh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ir8iy")
+allow_greater = true
+allow_lesser = true
+
+[node name="MessagesContainer" type="VBoxContainer" parent="UIManager"]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 5.0
+offset_right = 794.0
+offset_bottom = 120.0
+
+[node name="Message" type="RichTextLabel" parent="UIManager/MessagesContainer"]
+layout_mode = 2
+fit_content = true
+
+[node name="HolyMantleBtn" type="Button" parent="UIManager"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 24.725
+anchor_top = 2.175
+anchor_right = 26.7
+anchor_bottom = 3.95
+tooltip_text = "deliverance from evil"
+metadata/_edit_use_anchors_ = true
+
+[node name="HolyMantle" type="Sprite2D" parent="UIManager"]
+position = Vector2(1024, 134)
+texture = ExtResource("7_vtaks")
+metadata/_edit_lock_ = true
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("2_q6r6c")
+
+[node name="Player" type="Node" parent="TurnManager"]
+script = ExtResource("3_kdubu")
+metadata/_custom_type_script = "uid://dpv1luqqwsneu"
+
+[node name="LeftHand" type="Node" parent="TurnManager/Player"]
+script = ExtResource("4_d21ai")
+metadata/_custom_type_script = "uid://b7o11vb0q3t8j"
+
+[node name="RightHand" type="Node" parent="TurnManager/Player"]
+script = ExtResource("4_d21ai")
+metadata/_custom_type_script = "uid://b7o11vb0q3t8j"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(578, 319)
+
+[connection signal="pressed" from="UIManager/ResearchBtn" to="TurnManager/Player" method="_on_research_btn_pressed"]
+[connection signal="pressed" from="UIManager/BrewPotion" to="TurnManager/Player" method="_on_brew_potion_pressed"]
+[connection signal="pressed" from="UIManager/TakePotion" to="TurnManager/Player" method="_on_take_potion_pressed"]
+[connection signal="pressed" from="UIManager/KnifeBtn" to="TurnManager/Player" method="_on_knife_btn_pressed"]
+[connection signal="pressed" from="UIManager/HolyMantleBtn" to="TurnManager/Player" method="_on_holy_mantle_btn_pressed"]
+[connection signal="end_turn_phase" from="TurnManager" to="UIManager" method="_on_turn_manager_end_turn_phase"]
+[connection signal="game_over" from="TurnManager" to="UIManager" method="_on_game_over"]
+[connection signal="player_input_phase" from="TurnManager" to="UIManager" method="_on_turn_manager_player_input_phase"]
+[connection signal="start_turn_phase" from="TurnManager" to="UIManager" method="_on_turn_manager_start_turn_phase"]
+[connection signal="brewed_potion" from="TurnManager/Player" to="UIManager" method="_on_player_brewed_potion"]
+[connection signal="consumed_potion" from="TurnManager/Player" to="UIManager" method="_on_player_consumed_potion"]
+[connection signal="cut_off_finger" from="TurnManager/Player" to="UIManager" method="_on_player_cut_off_finger"]
+[connection signal="evil_won" from="TurnManager/Player" to="UIManager" method="_on_player_evil_won"]
+[connection signal="infection_won" from="TurnManager/Player" to="UIManager" method="_on_player_infection_won"]
+[connection signal="invalid_action" from="TurnManager/Player" to="UIManager" method="_on_player_invalid_action"]
+[connection signal="potion_effect_ended" from="TurnManager/Player" to="UIManager" method="_on_player_potion_effect_ended"]
+[connection signal="pray" from="TurnManager/Player" to="UIManager" method="_on_player_pray"]
+[connection signal="research_complete" from="TurnManager/Player" to="UIManager" method="_on_player_research_complete"]

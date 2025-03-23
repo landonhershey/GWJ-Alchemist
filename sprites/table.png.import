@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6itcpcujwkbh"
-path="res://.godot/imported/brewing_potion.png-634150139cab843010ae35fbf3cc7330.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://br253iujo4bul"
+valid=false
 
 [deps]
 
-source_file="res://sprites/brewing_potion.png"
-dest_files=["res://.godot/imported/brewing_potion.png-634150139cab843010ae35fbf3cc7330.ctex"]
+source_file="res://sprites/table.png"
 
 [params]
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpn6syodyaipv"]
+
+[ext_resource type="PackedScene" uid="uid://cwf53os0gwap5" path="res://scenes/endings/BaseEnding.tscn" id="1_f4t2r"]
+
+[node name="InfectionEnding" instance=ExtResource("1_f4t2r")]
+
+[node name="RichTextLabel" parent="." index="1"]
+text = "InfectionEnding"

@@ -5,4 +5,4 @@
 [node name="ResearchEnding" instance=ExtResource("1_ol7e8")]
 
 [node name="RichTextLabel" parent="." index="1"]
-text = "research ending"
+text = "AGAINST ALL ODDS I’VE MANAGED TO SAVE MY HAND. BUT AT WHAT COST?"

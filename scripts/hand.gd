@@ -38,7 +38,6 @@ func set_infection_rate(new_infection_rate: float) -> void:
 	infection_rate = new_infection_rate
 
 func set_productivity(new_productivity: float) -> void:
-	print("Setting productivity to: ", new_productivity)
 	productivity = new_productivity
 
 

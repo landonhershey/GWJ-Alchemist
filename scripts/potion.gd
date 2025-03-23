@@ -38,7 +38,6 @@ func remove_effect(player: Player) -> void:
 	player.right_hand.set_productivity(player.right_hand.get_productivity() / productivity_multiplier)
 	player.left_hand.set_productivity(player.left_hand.get_productivity() - productivity_addition)
 	player.right_hand.set_productivity(player.right_hand.get_productivity() - productivity_addition)
-	print("REMOVING potion effect")
 
 
 func end_turn(player: Player) -> void:

@@ -38,7 +38,6 @@ func _ready() -> void:
 
 	for i in range(1, 11):
 		var texture: Texture2D = load("res://sprites/hands/" + "hand_" + str(i) + ".png")
-		# hands_sprites.append(texture)
 		var image = texture.get_image()
 		var half_width = image.get_width() / 2
 		var cropped_image = Image.create(half_width, image.get_height(), false, image.get_format())
@@ -97,6 +96,10 @@ func _on_turn_manager_start_turn_phase() -> void:
 		display_temp_message("Your hand is almost gone...")
 	elif player.left_hand.infection == 0.6:
 		display_temp_message("Your hand is starting to feel numb...")
+	# elif player.left_hand.infection == 0.2:
+	# 	if overlay.visible == false:
+	# 		overlay.visible = true
+	# 	display_temp_message("I feel strange...")
 	elif player.left_hand.infection == 0.1:
 		display_temp_message("You feel a slight itch in your hand...")
 		
@@ -129,11 +132,9 @@ func modify_overlay(research_amount : float, evil : bool) -> void:
 
 
 func _on_turn_manager_player_input_phase() -> void:
-
 	#for child in messages_container.get_children():
 		#messages_container.remove_child(child)
 		#child.queue_free()
-
 
 	pass # Replace with function body.
 

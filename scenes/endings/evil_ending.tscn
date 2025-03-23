@@ -5,4 +5,4 @@
 [node name="EvilEnding" instance=ExtResource("1_ooedv")]
 
 [node name="RichTextLabel" parent="." index="1"]
-text = "Evil Ending"
+text = "PERHAPS THE CORRUPTION IS OUR FRIEND. PERHAPS IT MUST BE SHARED WITH THE WORLD. TOGETHER WE FREED THIS POWER UPON THE WORLD. "

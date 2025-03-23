@@ -17,7 +17,6 @@ func _init() -> void:
 	decay_message = "The adrenaline wears off. You feel tired."
 
 func apply_effect(player: Player) -> void:
-	print("Applying Adrenaline effect")
 	super.apply_effect(player)
 
 func end_turn(player: Player) -> void:

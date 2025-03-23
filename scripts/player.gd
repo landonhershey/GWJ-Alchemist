@@ -3,18 +3,11 @@ class_name Player
 
 @onready var Game = get_parent()
 
-# var left_infection : float = 0.0
-# var right_infection : float = 0.0
-# var max_infection : float = 100.0
-# var infection_rate : float = 1.0
-# var infection_rate_multiplier : float = 1.0
-# @export var infection_color : Color = Color(1, 0, 0)
 
 var research_progress : float = 0.0
 var max_research : float = 500.0
 var research_rate : float = 1.0
 var research_rate_multiplier : float = 1.0
-# @export var research_color : Color = Color(0, 0, 1)
 
 var evil = 0.0
 var evil_max = 100.0
@@ -51,13 +44,6 @@ signal evil_won
 
 
 func _ready() -> void:
-	# left_hand = Hand.new()
-	# right_hand = Hand.new()
-	# add_child(left_hand)
-	# add_child(right_hand)
-	print(get_children())
-	print(get_child(0).get_path())
-	print(left_hand.get_class())
 	left_hand.create(0.1, 0.025, 1.0)
 	right_hand.create(0.0, 0.0, 1.0)
 
@@ -96,12 +82,6 @@ func holy_mantle() -> void:
 	player_turn_over.emit()
 
 
-# func start_turn() -> void:
-# 	left_hand.start_turn()
-# 	right_hand.start_turn()
-
-# 	for potion in active_potions:
-# 		potion.apply_effect(self)
 
 func end_turn() -> void:
 	left_hand.end_turn()
@@ -130,8 +110,6 @@ func research():
 	if research_progress < max_research:
 		var research_increment = get_net_productivity()* research_rate
 		research_progress += research_increment
-		# if research_progress > max_research:
-		# 	research_progress = max_research
 		researched.emit(research_increment)
 
 
@@ -165,12 +143,10 @@ func take_potion(potion : Potion) -> void:
 
 
 func _on_left_hand_infection_exceeded() -> void:
-	print("Left hand infection exceeded!")
 	infection_won.emit()
 	# Game.on_game_over()
 
 func _on_right_hand_infection_exceeded() -> void:
-	print("Right hand infection exceeded!")
 	infection_won.emit()
 	# Game.on_game_over()
 
@@ -188,7 +164,6 @@ func _on_research_btn_pressed() -> void:
 	research()
 
 func _on_brew_potion_pressed() -> void:
-	print("Brewing potion")
 	brew_potion(Adrenaline.new())
 	player_turn_over.emit()
 

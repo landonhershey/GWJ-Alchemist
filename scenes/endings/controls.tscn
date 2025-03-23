@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwgs2unmtmnli"]
+
+[ext_resource type="Script" uid="uid://blnpvqd2ugal7" path="res://scripts/controls.gd" id="1_1ylvr"]
+
+[node name="Controls" type="Node"]
+script = ExtResource("1_1ylvr")

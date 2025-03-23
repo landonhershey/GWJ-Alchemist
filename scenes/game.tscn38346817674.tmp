@@ -20,8 +20,8 @@ default_font = ExtResource("1_kvpfn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trtic"]
 shader = ExtResource("10_trtic")
-shader_parameter/mix_color = Vector4(0.1, 0.2, 0.2, 1)
-shader_parameter/effect_strength = 500.0
+shader_parameter/mix_color = Vector4(0.1, 0.1, 0.1, 1)
+shader_parameter/effect_strength = 1000.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d7sh"]
 bg_color = Color(0.0596706, 0.0813081, 0.238832, 1)
@@ -79,10 +79,10 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 21.675
-anchor_top = 6.725
-anchor_right = 25.025
-anchor_bottom = 10.3
+anchor_left = 20.05
+anchor_top = 6.025
+anchor_right = 23.4
+anchor_bottom = 9.6
 tooltip_text = "research cure"
 text = "Research"
 metadata/_edit_use_anchors_ = true
@@ -160,20 +160,19 @@ texture = ExtResource("4_rj586")
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 22.2
-anchor_top = 1.175
-anchor_right = 24.175
-anchor_bottom = 2.95
+anchor_left = 24.725
+anchor_top = 2.175
+anchor_right = 26.7
+anchor_bottom = 3.95
 tooltip_text = "deliverance from evil"
 metadata/_edit_use_anchors_ = true
 
-[node name="HolyMantle" type="Sprite2D" parent="UIManager/HolyMantleBtn"]
-position = Vector2(35, 47)
+[node name="HolyMantle" type="Sprite2D" parent="UIManager"]
+position = Vector2(1024, 134)
 texture = ExtResource("7_vtaks")
 metadata/_edit_lock_ = true
 
 [node name="Overlay" type="ColorRect" parent="UIManager"]
-visible = false
 material = SubResource("ShaderMaterial_trtic")
 layout_mode = 0
 offset_left = -248.0
@@ -216,10 +215,10 @@ horizontal_alignment = 1
 [node name="ResearchBar" type="ProgressBar" parent="UIManager"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 25.65
-anchor_top = 11.775
-anchor_right = 26.7
-anchor_bottom = 14.825
+anchor_left = 23.7
+anchor_top = 11.85
+anchor_right = 24.75
+anchor_bottom = 14.9
 offset_top = 134.0
 offset_right = 108.0
 offset_bottom = 104.0
@@ -241,7 +240,7 @@ anchor_right = 5.075
 anchor_bottom = 10.1
 offset_top = 203.0
 offset_right = -31.9999
-offset_bottom = 295.0
+offset_bottom = 314.0
 rotation = -1.5708
 theme_override_styles/background = SubResource("StyleBoxFlat_trtic")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rj586")

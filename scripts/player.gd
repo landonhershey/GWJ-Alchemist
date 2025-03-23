@@ -48,7 +48,6 @@ signal invalid_action(message : String)
 signal research_complete
 signal infection_won
 signal evil_won
-signal load_start_game
 
 
 func _ready() -> void:
@@ -59,17 +58,13 @@ func _ready() -> void:
 	print(get_children())
 	print(get_child(0).get_path())
 	print(left_hand.get_class())
-	left_hand.create(0.0, 0.025, 1.0)
+	left_hand.create(0.1, 0.025, 1.0)
 	right_hand.create(0.0, 0.0, 1.0)
 
 	left_hand.connect("infection_complete", Callable(self, "_on_left_hand_infection_exceeded"))
 	right_hand.connect("infection_complete", Callable(self, "_on_right_hand_infection_exceeded"))
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("restart"):
-		load_start_game.emit()
-		get_tree().change_scene_to_file("res://scenes/start_game.tscn")
 
 func player_input() -> void:
 	# Handle player input here
@@ -82,7 +77,7 @@ func player_input() -> void:
 
 func knife() -> void:
 	if fingers <= 0:
-		invalid_action.emit("You have nothing left to cut off")
+		invalid_action.emit("You have nothing left to sacrifice")
 		return
 	fingers -=1
 	evil_rate += 1 * (1 + 5-fingers)
@@ -125,30 +120,18 @@ func end_turn() -> void:
 
 	print(get_stats())
 
-func _on_left_hand_infection_exceeded() -> void:
-	print("Left hand infection exceeded!")
-	infection_won.emit()
-	# Game.on_game_over()
 
-func _on_right_hand_infection_exceeded() -> void:
-	print("Right hand infection exceeded!")
-	infection_won.emit()
-	# Game.on_game_over()
-
-
-func _on_research_btn_pressed() -> void:
-	research()
 
 func research():
-	if research_progress > max_research:
+	if research_progress >= max_research:
 		research_complete.emit()
 		return
 
 	if research_progress < max_research:
 		var research_increment = get_net_productivity()* research_rate
 		research_progress += research_increment
-		if research_progress > max_research:
-			research_progress = max_research
+		# if research_progress > max_research:
+		# 	research_progress = max_research
 		researched.emit(research_increment)
 
 
@@ -171,16 +154,6 @@ func get_stats() -> Dictionary:
 	}
 
 
-func _on_take_potion_pressed() -> void:
-	var p = potion_supply.pop_back()
-	if p:
-		take_potion(p)
-		player_turn_over.emit()
-	else:
-		invalid_action.emit("No potions available!")
-
-
-
 func brew_potion(potion : Potion) -> void:
 	potion_supply.append(potion)
 	brewed_potion.emit(potion)
@@ -190,6 +163,29 @@ func take_potion(potion : Potion) -> void:
 	potion.apply_effect(self)
 	consumed_potion.emit(potion)
 
+
+func _on_left_hand_infection_exceeded() -> void:
+	print("Left hand infection exceeded!")
+	infection_won.emit()
+	# Game.on_game_over()
+
+func _on_right_hand_infection_exceeded() -> void:
+	print("Right hand infection exceeded!")
+	infection_won.emit()
+	# Game.on_game_over()
+
+
+func _on_take_potion_pressed() -> void:
+	var p = potion_supply.pop_back()
+	if p:
+		take_potion(p)
+		player_turn_over.emit()
+	else:
+		invalid_action.emit("No potions available!")
+
+
+func _on_research_btn_pressed() -> void:
+	research()
 
 func _on_brew_potion_pressed() -> void:
 	print("Brewing potion")

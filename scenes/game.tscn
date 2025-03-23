@@ -173,7 +173,6 @@ texture = ExtResource("7_vtaks")
 metadata/_edit_lock_ = true
 
 [node name="Overlay" type="ColorRect" parent="UIManager"]
-visible = false
 material = SubResource("ShaderMaterial_trtic")
 layout_mode = 0
 offset_left = -248.0

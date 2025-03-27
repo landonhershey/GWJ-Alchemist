@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxjvxdr3r8qhu"]
+[gd_scene load_steps=3 format=3 uid="uid://dxjvxdr3r8qhu"]
 
 [ext_resource type="PackedScene" uid="uid://cwf53os0gwap5" path="res://scenes/endings/BaseEnding.tscn" id="1_ooedv"]
+[ext_resource type="Script" uid="uid://djxbuwpixim2s" path="res://scripts/bad_ending.gd" id="2_imx4w"]
 
 [node name="EvilEnding" instance=ExtResource("1_ooedv")]
+script = ExtResource("2_imx4w")
 
 [node name="RichTextLabel" parent="." index="1"]
 text = "PERHAPS THE CORRUPTION IS OUR FRIEND. PERHAPS IT MUST BE SHARED WITH THE WORLD. TOGETHER WE FREED THIS POWER UPON THE WORLD. "

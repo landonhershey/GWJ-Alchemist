@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpn6syodyaipv"]
+[gd_scene load_steps=3 format=3 uid="uid://bpn6syodyaipv"]
 
 [ext_resource type="PackedScene" uid="uid://cwf53os0gwap5" path="res://scenes/endings/BaseEnding.tscn" id="1_f4t2r"]
+[ext_resource type="Script" uid="uid://djxbuwpixim2s" path="res://scripts/bad_ending.gd" id="2_71kgd"]
 
 [node name="InfectionEnding" instance=ExtResource("1_f4t2r")]
+script = ExtResource("2_71kgd")
 
 [node name="RichTextLabel" parent="." index="1"]
 text = "IT’S TOO LATE. THE CORRUPTED HAND HAS GAINED FULL CONTROL. THE DOOR IS OPEN. ONLY GOD CAN SAVE ME NOW. 

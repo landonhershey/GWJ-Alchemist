@@ -44,8 +44,6 @@ func _ready() -> void:
 		cropped_image.blit_rect(image, Rect2(0, 0, half_width, image.get_height()), Vector2(0, 0))
 		var cropped_texture = ImageTexture.create_from_image(cropped_image)
 		hands_sprites.append(cropped_texture)
-	print("Hands sprites loaded: ", hands_sprites)
-
 	for i in range(0, 6):
 		var right_hand_texture: Texture2D = load("res://sprites/right_hands/" + "right_hand_" + str(i) + ".png")
 		right_hands_sprites.append(right_hand_texture)
@@ -53,8 +51,14 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Button:
 			child.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		
+	#initialize shader parameters
+	overlay.set_shader()
+
 
 # Action Functions
+
+
 
 
 
@@ -118,13 +122,17 @@ func _on_turn_manager_start_turn_phase() -> void:
 
 func modify_overlay(research_amount : float, evil : bool) -> void:
 	var shader_material: ShaderMaterial = overlay.material
+	
 
 	if research_amount > 0:
 		var current_effect = shader_material.get_shader_parameter("effect_strength")
+		print("SHADER EFFECT", current_effect)
 		shader_material.set_shader_parameter("effect_strength", max(current_effect-(research_amount), 0))
 #	
 	if evil:
-		# var current_color = shader_material.get_shader_parameter("mix_color")
+
+		var current_color = shader_material.get_shader_parameter("mix_color")
+		print("CURRENT COLOR SHADER: ", current_color)
 		shader_material.set_shader_parameter("mix_color", Color(0.01*max(1.0, (evil_bar.value/2.5)), 0.01, 0.01, 1))
 
 

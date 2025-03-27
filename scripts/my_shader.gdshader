@@ -7,7 +7,7 @@ uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 void fragment() {
     vec2 uv = SCREEN_UV;
     vec4 color = texture(SCREEN_TEXTURE, uv);
-    
+
     color.rgb = mix(color.rgb, mix_color.rgb, effect_strength);
     // Output the final color
     COLOR = color;

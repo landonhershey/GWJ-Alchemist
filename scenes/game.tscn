@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbssb3p448wf4"]
+[gd_scene load_steps=25 format=3 uid="uid://dbssb3p448wf4"]
 
 [ext_resource type="Texture2D" uid="uid://susmo0ambs03" path="res://sprites/hands/hand_1.png" id="1_0hol4"]
 [ext_resource type="Texture2D" uid="uid://bcfha6ywqcqxw" path="res://desk2.jpg" id="1_dinhu"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://o0kopj15344w" path="res://sprites/holy_mantle.png" id="7_vtaks"]
 [ext_resource type="Shader" uid="uid://droe5w1v7dalj" path="res://scripts/my_shader.gdshader" id="10_trtic"]
 [ext_resource type="Script" uid="uid://bclg472kmuj2q" path="res://scenes/overlay.gd" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://dw7cq6nrtqce5" path="res://sprites/potions/blue_potion.png" id="13_ca42v"]
 [ext_resource type="PackedScene" uid="uid://dwgs2unmtmnli" path="res://scenes/endings/controls.tscn" id="13_kvuet"]
 
 [sub_resource type="Theme" id="Theme_dinhu"]
@@ -44,7 +45,7 @@ bg_color = Color(0.668634, 0, 0.116657, 1)
 
 [node name="World" type="Node2D"]
 
-[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("player", "message", "message_temp", "power_bar", "research_bar", "evil_bar", "hand_sprite", "messages_container", "potion_container", "overlay")]
+[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("player", "message", "message_temp", "knife_button", "cure_button", "power_bar", "research_bar", "evil_bar", "hand_sprite", "messages_container", "potion_container", "overlay")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -55,6 +56,8 @@ default_font = ExtResource("1_kvpfn")
 player = NodePath("../TurnManager/Player")
 message = NodePath("MessagesContainer/Message")
 message_temp = NodePath("MessagesContainer/MessageTemp")
+knife_button = NodePath("KnifeBtn")
+cure_button = NodePath("CureBtn")
 power_bar = NodePath("PowerBar")
 research_bar = NodePath("ResearchBar")
 evil_bar = NodePath("EvilBar")
@@ -251,6 +254,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Controls" parent="UIManager" instance=ExtResource("13_kvuet")]
 
+[node name="CureBtn" type="Button" parent="UIManager"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 490.0
+offset_top = 136.0
+offset_right = 647.0
+offset_bottom = 410.0
+tooltip_text = "consume the cure"
+
+[node name="BluePotion" type="Sprite2D" parent="UIManager/CureBtn"]
+position = Vector2(91, 116)
+scale = Vector2(3, 3)
+texture = ExtResource("13_ca42v")
+metadata/_edit_lock_ = true
+
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("2_q6r6c")
 
@@ -274,6 +293,7 @@ position = Vector2(578, 319)
 [connection signal="pressed" from="UIManager/TakePotion" to="TurnManager/Player" method="_on_take_potion_pressed"]
 [connection signal="pressed" from="UIManager/KnifeBtn" to="TurnManager/Player" method="_on_knife_btn_pressed"]
 [connection signal="pressed" from="UIManager/HolyMantleBtn" to="TurnManager/Player" method="_on_holy_mantle_btn_pressed"]
+[connection signal="pressed" from="UIManager/CureBtn" to="TurnManager/Player" method="_on_cure_btn_pressed"]
 [connection signal="end_turn_phase" from="TurnManager" to="UIManager" method="_on_turn_manager_end_turn_phase"]
 [connection signal="game_over" from="TurnManager" to="UIManager" method="_on_game_over"]
 [connection signal="player_input_phase" from="TurnManager" to="UIManager" method="_on_turn_manager_player_input_phase"]

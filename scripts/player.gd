@@ -174,3 +174,7 @@ func _on_knife_btn_pressed() -> void:
 
 func _on_holy_mantle_btn_pressed() -> void:
 	holy_mantle()
+
+
+func _on_cure_btn_pressed() -> void:
+	research()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwf53os0gwap5"]
 
-[ext_resource type="FontFile" uid="uid://b73hyirjrkfwe" path="res://UncialAntiqua-Regular.ttf" id="1_gjapp"]
+[ext_resource type="FontFile" uid="uid://b73hyirjrkfwe" path="res://assets/UncialAntiqua-Regular.ttf" id="1_gjapp"]
 [ext_resource type="PackedScene" uid="uid://dwgs2unmtmnli" path="res://scenes/endings/controls.tscn" id="2_fg5xq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6d56"]

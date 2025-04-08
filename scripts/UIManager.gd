@@ -9,7 +9,6 @@ var research_ending = preload("res://scenes/endings/research_ending.tscn")
 
 @export var player : Player
 
-
 @export var message : RichTextLabel
 @export var message_temp: RichTextLabel
 
@@ -20,10 +19,10 @@ var research_ending = preload("res://scenes/endings/research_ending.tscn")
 @export var evil_bar : ProgressBar
 @export var hand_sprite : Sprite2D
 @onready var right_hand_sprite = $RightHand
-@onready var hands_folder =  "res://sprites/hands/"
+@onready var hands_folder =  "res://assets/sprites/hands/"
 @export var hands_sprites : Array[Texture2D] = []
 
-@onready var right_hands_folder =  "res://sprites/right_hands/"
+@onready var right_hands_folder =  "res://assets/sprites/right_hands/"
 var right_hands_sprites : Array[Texture2D] = []
 
 @export var messages_container : VBoxContainer
@@ -42,7 +41,7 @@ func _ready() -> void:
 	research_bar.max_value = player.max_research
 
 	for i in range(1, 11):
-		var texture: Texture2D = load("res://sprites/hands/" + "hand_" + str(i) + ".png")
+		var texture: Texture2D = load("res://assets/sprites/hands/" + "hand_" + str(i) + ".png")
 		var image = texture.get_image()
 		var half_width = image.get_width() / 2.0
 		var cropped_image = Image.create(half_width, image.get_height(), false, image.get_format())
@@ -50,7 +49,7 @@ func _ready() -> void:
 		var cropped_texture = ImageTexture.create_from_image(cropped_image)
 		hands_sprites.append(cropped_texture)
 	for i in range(0, 6):
-		var right_hand_texture: Texture2D = load("res://sprites/right_hands/" + "right_hand_" + str(i) + ".png")
+		var right_hand_texture: Texture2D = load("res://assets/sprites/right_hands/" + "right_hand_" + str(i) + ".png")
 		right_hands_sprites.append(right_hand_texture)
 
 	for child in get_children():
@@ -63,18 +62,11 @@ func _ready() -> void:
 
 # Action Functions
 
-
-
-
-
-
 func display_message(text: String) -> void:
 	message.text = text
 
 func display_temp_message(text: String) -> void:
 	message_temp.text = text
-
-
 
 # Signals:
 
@@ -139,18 +131,6 @@ func pre_victory_phase():
 	overlay.visible = false # hide shader overlay
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 func modify_overlay(research_amount : float, evil : bool) -> void:
 	var shader_material: ShaderMaterial = overlay.material
 	
@@ -159,15 +139,11 @@ func modify_overlay(research_amount : float, evil : bool) -> void:
 		var current_effect = shader_material.get_shader_parameter("effect_strength")
 		print("SHADER EFFECT", current_effect)
 		shader_material.set_shader_parameter("effect_strength", max(current_effect-(research_amount), 0))
-#	
+	
 	if evil:
-
 		var current_color = shader_material.get_shader_parameter("mix_color")
 		print("CURRENT COLOR SHADER: ", current_color)
 		shader_material.set_shader_parameter("mix_color", Color(0.01*max(1.0, (evil_bar.value/2.5)), 0.01, 0.01, 1))
-
-
-
 
 
 func _on_turn_manager_player_input_phase() -> void:
@@ -193,7 +169,7 @@ func on_player_researched(amount : float) -> void:
 
 func _on_player_brewed_potion(_potion: Potion) -> void:
 	var tex_rect = TextureRect.new()
-	tex_rect.texture = load("res://sprites/potions/pink_potion.png")
+	tex_rect.texture = load("res://assets/sprites/potions/pink_potion.png")
 	tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT  # Keep sprite aspect ratio
 	potion_container.add_child(tex_rect)
 	display_message("You brewed adrenaline!")
@@ -211,16 +187,12 @@ func _on_player_cut_off_finger(fingers: int) -> void:
 	display_message("Your powers have doubled, at a cost...")
 
 
-
-
-
 func _on_player_invalid_action(user_message : String = "You can't do that right now...") -> void:
 	message.text = user_message
 
 
 func _on_player_potion_effect_ended(potion:Potion) -> void:
 	display_temp_message(potion.decay_message)
-
 
 # Ending Signals
 

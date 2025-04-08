@@ -11,7 +11,7 @@ func _init() -> void:
 
 	infection_multiplier = 1.0
 	infection_reduction = 0.0
-	productivity_addition = 5.0
+	productivity_addition = 10.0
 
 	message = "You feel a surge of energy!"
 	decay_message = "The adrenaline wears off. You feel tired."

@@ -13,6 +13,8 @@ var research_ending = preload("res://scenes/endings/research_ending.tscn")
 @export var message : RichTextLabel
 @export var message_temp: RichTextLabel
 
+@export var knife_button : Button
+@export var cure_button : Button
 @export var power_bar : ProgressBar
 @export var research_bar : ProgressBar
 @export var evil_bar : ProgressBar
@@ -31,6 +33,9 @@ var right_hands_sprites : Array[Texture2D] = []
 var evil_last_turn : float = 0.0 # track value of player evil last turn (bad practice I know)
 
 func _ready() -> void:
+	overlay.visible = true
+	cure_button.visible = false
+	knife_button.visible = true
 	player.researched.connect(Callable(self,"on_player_researched"))
 	player.brewed_potion.connect(Callable(self,"on_player_brewed_potion"))
 
@@ -39,7 +44,7 @@ func _ready() -> void:
 	for i in range(1, 11):
 		var texture: Texture2D = load("res://sprites/hands/" + "hand_" + str(i) + ".png")
 		var image = texture.get_image()
-		var half_width = image.get_width() / 2
+		var half_width = image.get_width() / 2.0
 		var cropped_image = Image.create(half_width, image.get_height(), false, image.get_format())
 		cropped_image.blit_rect(image, Rect2(0, 0, half_width, image.get_height()), Vector2(0, 0))
 		var cropped_texture = ImageTexture.create_from_image(cropped_image)
@@ -105,19 +110,45 @@ func _on_turn_manager_start_turn_phase() -> void:
 	# 		overlay.visible = true
 	# 	display_temp_message("I feel strange...")
 	elif player.left_hand.infection == 0.1:
-		display_temp_message("You feel a slight itch in your hand...")
+		display_temp_message("Your hand feels strange...")
 		
 	if research_bar.value > 400:
 		display_temp_message("Knowledge is within your grasp")
 	if research_bar.value == 500:
 		message.text = ""
 		display_temp_message("You wake up")
-
-
-
+		pre_victory_phase()
 	var power_progress = player.get_net_productivity() / player.peak_productivity
 	power_bar.value = power_progress * 100
 	modify_overlay(0, true)
+
+		
+
+func pre_victory_phase():
+	# Disable clickability for all buttons
+	for child in get_children():
+		if child is Button:
+			child.disabled = true
+			child.mouse_default_cursor_shape = Control.CURSOR_ARROW
+	# Hide knife, reveal and enable cure button
+	knife_button.visible = false
+	cure_button.visible = true
+	cure_button.disabled = false
+	cure_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+	overlay.visible = false # hide shader overlay
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 func modify_overlay(research_amount : float, evil : bool) -> void:
@@ -157,6 +188,7 @@ func _on_turn_manager_end_turn_phase() -> void:
 func on_player_researched(amount : float) -> void:
 	research_bar.value = player.research_progress
 	modify_overlay(amount, true)
+	display_message("You search for a cure")
 	# print("Research progress updated: ", research_bar.value)
 
 func _on_player_brewed_potion(_potion: Potion) -> void:
